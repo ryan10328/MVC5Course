@@ -191,6 +191,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AtleastContainOneSpaceAttribute.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\FabricsDbConext.cs" />
     <Compile Include="Models\IdentityModels.cs" />

@@ -19,6 +19,7 @@ namespace MVC5Course.Models
 
         [Required]
         [StringLength(80)]
+        [AtleastContainOneSpace(ErrorMessage = "請至少包含一個空白字元")]
         public string ProductName { get; set; }
 
         [Required]
