@@ -11,7 +11,7 @@ namespace MVC5Course.Controllers
     public class EFController : Controller
     {
         FabricsDbConext db = new FabricsDbConext();
-        public ActionResult Index()
+        public ActionResult Index(bool? IsActive, string keyword)
         {
             //var product = new Product()
             //{
@@ -22,31 +22,40 @@ namespace MVC5Course.Controllers
             //};
 
             //db.Products.Add(product);
-            var products = db.Products.OrderByDescending(x => x.ProductId).Take(5);
+            var products = db.Products.OrderByDescending(x => x.ProductId).AsQueryable();
 
-            foreach (var item in products)
+            if (IsActive.HasValue)
             {
-                item.Price = item.Price + 1;
+                products = products.Where(x => x.Active.Value == IsActive);
+            }
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                products = products.Where(x => x.ProductName.Contains(keyword));
             }
 
-            try
-            {
-                db.SaveChanges();
-                // after executed savechanges, you can get product id
-            }
-            catch (DbEntityValidationException ex)
-            {
-                foreach (var item in ex.EntityValidationErrors)
-                {
-                    string entityName = item.Entry.Entity.GetType().Name;
-                    foreach (var err in item.ValidationErrors)
-                    {
-                        throw new DbEntityValidationException($"Message: {err.ErrorMessage}, Model: { entityName }, PropName: {err.PropertyName}");
-                    }
-                }
-            }
+            //foreach (var item in products)
+            //{
+            //    item.Price = item.Price + 1;
+            //}
+
+            //try
+            //{
+            //    db.SaveChanges();
+            //    // after executed savechanges, you can get product id
+            //}
+            //catch (DbEntityValidationException ex)
+            //{
+            //    foreach (var item in ex.EntityValidationErrors)
+            //    {
+            //        string entityName = item.Entry.Entity.GetType().Name;
+            //        foreach (var err in item.ValidationErrors)
+            //        {
+            //            throw new DbEntityValidationException($"Message: {err.ErrorMessage}, Model: { entityName }, PropName: {err.PropertyName}");
+            //        }
+            //    }
+            //}
             // var singleProduct = db.Products.Where(x => x.ProductId == product.ProductId).ToList();
-            return View(db.Products.OrderByDescending(x => x.ProductId).Take(5));
+            return View(products);
         }
 
         public ActionResult Details(int? id)
