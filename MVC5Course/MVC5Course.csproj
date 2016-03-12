@@ -192,15 +192,74 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AtleastContainOneSpaceAttribute.cs" />
-    <Compile Include="Models\Client.cs" />
-    <Compile Include="Models\FabricsDbConext.cs" />
+    <Compile Include="Models\Client.cs">
+      <DependentUpon>Fabrics.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ClientRepository.cs">
+      <DependentUpon>IRepository.EF6.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EFRepository.cs">
+      <DependentUpon>IRepository.EF6.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EFUnitOfWork.cs">
+      <DependentUpon>IRepository.EF6.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Fabrics.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Fabrics.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Fabrics.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Fabrics.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Fabrics.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Fabrics.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\IRepository.EF6.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IRepository.EF6.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IUnitOfWork.cs">
+      <DependentUpon>IRepository.EF6.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MemberViewModel.cs" />
-    <Compile Include="Models\Occupation.cs" />
-    <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\OrderLine.cs" />
-    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Occupation.cs">
+      <DependentUpon>Fabrics.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OccupationRepository.cs">
+      <DependentUpon>IRepository.EF6.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>Fabrics.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderLine.cs">
+      <DependentUpon>Fabrics.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderLineRepository.cs">
+      <DependentUpon>IRepository.EF6.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderRepository.cs">
+      <DependentUpon>IRepository.EF6.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Product.cs">
+      <DependentUpon>Fabrics.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductRepository.cs">
+      <DependentUpon>IRepository.EF6.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RepositoryHelper.cs">
+      <DependentUpon>IRepository.EF6.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RepositoryIQueryableExtensions.cs">
+      <DependentUpon>IRepository.EF6.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -212,8 +271,29 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\Fabrics.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Fabrics.edmx</DependentUpon>
+      <LastGenOutput>Fabrics.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Fabrics.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Fabrics.edmx</DependentUpon>
+      <LastGenOutput>Fabrics.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\IRepository.EF6.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IRepository.EF6.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\Fabrics.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Fabrics.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Fabrics.edmx.diagram">
+      <DependentUpon>Fabrics.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -272,7 +352,9 @@
     <Content Include="Views\EF\Index.cshtml" />
     <Content Include="Views\EF\Details.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

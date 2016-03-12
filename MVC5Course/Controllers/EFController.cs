@@ -10,7 +10,7 @@ namespace MVC5Course.Controllers
 {
     public class EFController : Controller
     {
-        FabricsDbConext db = new FabricsDbConext();
+        FabricsEntities db = new FabricsEntities();
         public ActionResult Index(bool? IsActive, string keyword)
         {
             //var product = new Product()
