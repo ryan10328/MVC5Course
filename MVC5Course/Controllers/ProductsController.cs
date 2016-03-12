@@ -16,6 +16,7 @@ namespace MVC5Course.Controllers
         // GET: Products
         public ActionResult Index()
         {
+
             return View(repo.All());
         }
 
@@ -52,6 +53,7 @@ namespace MVC5Course.Controllers
             {
                 repo.Add(product);
                 repo.UnitOfWork.Commit();
+                TempData["Message"] = "儲存成功";
                 return RedirectToAction("Index");
             }
 
