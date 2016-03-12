@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@section Scripts{
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    @*<script type="text/javascript">
+            $(function () {
+                $("#GetJson").bind("click", function () {
+                    $.get("/AR/GetJson/", function (data) {
+                        console.log(data);
+                    })
+                });
+            });
+
+
+        </script>*@
+
+    <script type="text/javascript">
+        var app = angular.module("Main", []);
+
+        app.controller("IndexController", function ($scope, $http, $log) {
+            $scope.init = function () {
+                $http.get("/AR/GetJson").success(function (data) {
+                    $scope.ProductList = data;
+                }).error(function (data) {
+                    $log.info(data);
+                });
+            };
+        });
+    </script>
+
+
+
+}
+
+<div class="row" ng-app="Main" ng-controller="IndexController" ng-init="init()">
+    <div class="col-md-6 col-md-push-3">
+        <table class="table table-hover">
+            <tr>
+                <th>ProductId</th>
+                <th>ProductName</th>
+            </tr>
+            <tr ng-repeat="p in ProductList">
+                <td>{{ p.ProductId }}</td>
+                <td>{{ p.ProductName }}</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+@*<input type="button" value="Get Json" class="btn btn-primary" id="GetJson" />*@
