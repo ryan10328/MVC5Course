@@ -1,0 +1,64 @@
+﻿@model IEnumerable<MVC5Course.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm("Index", "MB", FormMethod.Post))
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock)
+            </th>
+            <th></th>
+        </tr>
+
+        @Html.AntiForgeryToken()
+        @{
+            var data = Model.ToArray();
+
+        }
+
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            @Html.HiddenFor(modelItem => data[i].ProductId)
+            <tr>
+                <td>
+                    @Html.EditorFor(modelItem => data[i].ProductName)
+                </td>
+                <td>
+                    @Html.EditorFor(modelItem => data[i].Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => data[i].Active)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => data[i].Stock)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = data[i].ProductId }) |
+                    @Html.ActionLink("Details", "Details", new { id = data[i].ProductId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = data[i].ProductId })
+                </td>
+            </tr>
+
+        }
+    </table>
+    <input type="submit" value="送出" class="btn btn-primary" />
+
+}
