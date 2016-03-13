@@ -5,7 +5,7 @@
 }
 
 <h2>Index</h2>
-@if(TempData["Message"] != null)
+@if (TempData["Message"] != null)
 {
     <h3>@TempData["Message"]</h3>
 }
@@ -46,7 +46,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
+                @Html.ActionLink("Details", "Details", "PV", new { id = item.ProductId }, null) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
             </td>
         </tr>
