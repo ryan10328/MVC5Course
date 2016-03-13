@@ -40,18 +40,24 @@ namespace MVC5Course.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(IList<Product> data)
+        public ActionResult Index(IList<ProductViewModel> data)
         {
-            foreach (var item in data)
+            if (ModelState.IsValid)
             {
-                var product = repo.Get(item.ProductId);
-                product.ProductName = item.ProductName;
-                product.Price = item.Price;
+                foreach (var item in data)
+                {
+                    var product = repo.Get(item.ProductId);
+                    product.ProductName = item.ProductName;
+                    product.Price = item.Price;
+                }
+
+                repo.UnitOfWork.Commit();
+                return RedirectToAction("Index", "MB");
             }
 
-            repo.UnitOfWork.Commit();
+            return View(repo.All().Take(5));
 
-            return RedirectToAction("Index","MB");
+
         }
     }
 }
