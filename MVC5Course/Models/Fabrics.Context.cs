@@ -28,7 +28,7 @@ namespace MVC5Course.Models
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Occupation> Occupations { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<OrderLine> OrderLines { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<OrderLine> OrderLines { get; set; }
     }
 }

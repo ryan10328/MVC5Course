@@ -8,13 +8,13 @@
         <EntityTypeShape EntityType="Model.Client" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Occupation" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Order" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.OrderLine" Width="1.5" PointX="7.5" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Product" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_Client_Occupation" ManuallyRouted="false" />
         <AssociationConnector Association="Model.fk_Order_ClientId" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.fk_OrderLine_OrderId" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.fk_OrderLine_ProductId" ManuallyRouted="false" />
-      </Diagram>
+        <EntityTypeShape EntityType="Model.OrderLine" Width="1.5" PointX="7.5" PointY="2.25" />
+        <AssociationConnector Association="Model.fk_OrderLine_OrderId" />
+        <AssociationConnector Association="Model.fk_OrderLine_ProductId" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
