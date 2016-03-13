@@ -39,5 +39,10 @@ namespace MVC5Course.Controllers
         {
             return (email == "ryan10328@gmail.com" && password == "123");
         }
+
+        public ActionResult RazorTest()
+        {
+            return PartialView();
+        }
     }
 }
