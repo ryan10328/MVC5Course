@@ -1,13 +1,22 @@
-﻿@{
-    <p>哈囉</p>
-    @:哈囉
-    <br/>
-    <br />
-//text是razor擴充的(他輸出到前台就不會出現了)
-    <text>
-        Hello, World
-    </text>
+﻿@model Int32[]
 
-
-
+@foreach (var item in Model)
+{
+    @item
 }
+
+<br />
+<br />
+@foreach (var item in Model)
+{
+    @Html.Raw(item + " ")
+}
+
+<br />
+<br />
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>@item</li>
+    }
+</ul>
