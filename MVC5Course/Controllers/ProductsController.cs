@@ -14,10 +14,29 @@ namespace MVC5Course.Controllers
     {
         ProductRepository repo = RepositoryHelper.GetProductRepository();
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(int? id, bool? isActive, string keyword)
         {
+            var result = repo.All().Take(20);
+            if (id.HasValue)
+            {
+                ViewBag.SelectedProductId = id.Value;
+            }
 
-            return View(repo.All());
+            var items = new List<SelectListItem>();
+            items.Add(new SelectListItem() { Text = "是", Value = "true" });
+            items.Add(new SelectListItem() { Text = "否", Value = "false" });
+            ViewBag.isActive = new SelectList(items, "Value", "Text");
+
+            if (isActive.HasValue)
+            {
+                result = result.Where(x => x.Active == isActive.Value);
+            }
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                result = result.Where(x => x.ProductName.Contains(keyword));
+            }
+
+            return View(result);
         }
 
         // GET: Products/Details/5

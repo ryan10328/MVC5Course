@@ -27,9 +27,11 @@ namespace MVC5Course.Controllers
             return View(product);
         }
 
-        public ActionResult OrderLines(int id)
+        public ActionResult OrderLines(int? id)
         {
             var orderlines = repo.Get(id).OrderLines;
+
+          
             return View(orderlines);
         }
     }

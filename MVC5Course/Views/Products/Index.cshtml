@@ -1,4 +1,5 @@
-﻿@model IEnumerable<MVC5Course.Models.Product>
+﻿
+@model IEnumerable<MVC5Course.Models.Product>
 
 @{
     ViewBag.Title = "Index";
@@ -12,6 +13,13 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm("Index", "Products", FormMethod.Get))
+{
+    @Html.DropDownList("isActive", null, "---請選擇---", new { onchange = "this.form.submit();" })
+    @Html.TextBox("keyword", null, new { onchange = "this.form.submit();" });
+}
+
 <table class="table">
     <tr>
         <th>
@@ -46,10 +54,16 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
-                @Html.ActionLink("Details", "Details", "PV", new { id = item.ProductId }, null) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
+                @Html.ActionLink("Details", "Index", new { type = "Detail", id = item.ProductId }, null) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductId }) |
+                @Html.ActionLink("OrderLines", "Index", new { id = item.ProductId }, null)
             </td>
         </tr>
     }
 
 </table>
+
+@if (ViewBag.SelectedProductId != null)
+{
+    @Html.Action("OrderLines", "PV", new { type = "OrderLine", id = ViewBag.SelectedProductId })
+}
