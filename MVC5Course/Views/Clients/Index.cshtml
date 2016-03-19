@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<MVC5Course.Models.Client>
+@using PagedList
+@using PagedList.Mvc
 
 @{
     ViewBag.Title = "Index";
@@ -64,6 +66,16 @@
 
 </table>
 
+@{ 
+    var data = Model as IPagedList;
+}
+
+@* Non Ajax *@
+@*@Html.PagedListPager(data, x => Url.Action("Index","Clients", new { page = x }))*@
+
+@* Ajax *@
+
+@Html.PagedListPager(data, x => Url.Action("Index", "Clients", new { page = x }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing("#main"))
 <hr />
 
 <div id="Detail">
