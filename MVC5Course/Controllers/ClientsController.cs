@@ -64,8 +64,9 @@ namespace MVC5Course.Controllers
         }
 
         // GET: Clients/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, int page = 1)
         {
+            ViewBag.page = page;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -75,6 +76,7 @@ namespace MVC5Course.Controllers
             {
                 return HttpNotFound();
             }
+
             ViewBag.OccupationId = new SelectList(db.Occupations, "OccupationId", "OccupationName", client.OccupationId);
             return View(client);
         }
@@ -84,17 +86,19 @@ namespace MVC5Course.Controllers
         // 詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ClientId,FirstName,MiddleName,LastName,Gender,DateOfBirth,CreditRating,XCode,OccupationId,TelephoneNumber,Street1,Street2,City,ZipCode,Longitude,Latitude,Notes")] Client client)
+        public ActionResult Edit([Bind(Include = "ClientId,FirstName,MiddleName,LastName,Gender,DateOfBirth,CreditRating,XCode,OccupationId,TelephoneNumber,Street1,Street2,City,ZipCode,Longitude,Latitude,Notes")]
+        Client client, int page = 1)
         {
+            ViewBag.page = page;
             if (ModelState.IsValid)
             {
                 db.Entry(client).State = EntityState.Modified;
                 db.SaveChanges();
-                var clients = db.Clients.Include(c => c.Occupation).Take(20);
-                return View("Index", clients);
+                //var clients = db.Clients.Include(c => c.Occupation).Take(20);
+                //return View("Index", clients);
                 // 邏輯綁定太緊，改一個就一定會跟著改
                 //return this.Index();
-                //return RedirectToAction("Index");
+                return RedirectToAction("Index", new { page = page });
             }
             ViewBag.OccupationId = new SelectList(db.Occupations, "OccupationId", "OccupationName", client.OccupationId);
             return View(client);

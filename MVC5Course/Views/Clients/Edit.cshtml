@@ -13,8 +13,8 @@
 
 @using (Ajax.BeginForm(new AjaxOptions() { UpdateTargetId = "main" }))
 {
+    @Html.Hidden("page")
     @Html.AntiForgeryToken()
-    
     <div class="form-horizontal">
         <h4>Client</h4>
         <hr />

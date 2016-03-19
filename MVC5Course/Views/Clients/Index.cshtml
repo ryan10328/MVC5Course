@@ -3,6 +3,10 @@
 @using PagedList.Mvc
 
 @{
+    if (IsAjax)
+    {
+        Layout = null;
+    }
     ViewBag.Title = "Index";
 }
 
@@ -57,7 +61,7 @@
             </td>
 
             <td>
-                @Ajax.ActionLink("Edit", "Edit", new { id = item.ClientId }, new AjaxOptions() { UpdateTargetId = "Detail" }) |
+                @Ajax.ActionLink("Edit", "Edit", new { id = item.ClientId, page = ViewData["page"] }, new AjaxOptions() { UpdateTargetId = "Detail" }) |
                 @Ajax.ActionLink("Details", "Details", new { id = item.ClientId }, new AjaxOptions() { UpdateTargetId = "Detail" }) |
                 @Ajax.ActionLink("Delete", "Delete", new { id = item.ClientId }, new AjaxOptions() { UpdateTargetId = "Detail" })
             </td>
@@ -66,7 +70,7 @@
 
 </table>
 
-@{ 
+@{
     var data = Model as IPagedList;
 }
 
